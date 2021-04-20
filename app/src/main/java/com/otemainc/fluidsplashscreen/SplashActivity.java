@@ -11,7 +11,7 @@ import java.util.TimerTask;
 import me.itangqi.waveloadingview.WaveLoadingView;
 
 public class SplashActivity extends AppCompatActivity {
-WaveLoadingView waveLoadingView;
+    WaveLoadingView waveLoadingView;
     int total_duration = 21999;
     int duration_of_one_step =  1000;
 
@@ -29,27 +29,33 @@ WaveLoadingView waveLoadingView;
 
             @Override
             public void onTick(long timetillfinished) {
-                // calculate the progress by subtracting the time till finished from the total Duration
-                int progress = (int) (((total_duration - timetillfinished) / 1000)*5);
+                // calculate the progress by subtracting the time till finished
+                // from the total Duration
+                int progress = (int) (((total_duration - timetillfinished)
+                        / duration_of_one_step)*5);
                 waveLoadingView.setProgressValue(progress);
                 if(progress<45){
-                    waveLoadingView.setBottomTitle("Filling up . . . " + progress + " % ");
+                    waveLoadingView.setBottomTitle("Filling up . . . " +
+                            progress + " % ");
                     waveLoadingView.setCenterTitle("");
                     waveLoadingView.setTopTitle("");
                 }else if(progress<75){
                     waveLoadingView.setBottomTitle("");
-                    waveLoadingView.setCenterTitle("Filling up . . . " + progress + " % ");
+                    waveLoadingView.setCenterTitle("Filling up . . . " +
+                            progress + " % ");
                     waveLoadingView.setTopTitle("");
                 }else{
                     waveLoadingView.setBottomTitle("");
                     waveLoadingView.setCenterTitle("");
-                    waveLoadingView.setTopTitle("Almost Full . . ." + progress + " % ");
+                    waveLoadingView.setTopTitle("Almost Full . . ." +
+                            progress + " % ");
                 }
             }
 
             @Override
             public void onFinish() {
-                Intent loadMain = new Intent(SplashActivity.this,MainActivity.class);
+                Intent loadMain = new Intent(SplashActivity.this,
+                        MainActivity.class);
                 startActivity(loadMain);
                 finish();
             }
